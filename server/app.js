@@ -6,16 +6,19 @@ var http = require('http');
 var mysql = require('mysql');
 
 // Connection with MySql
-/*var conn = mysql.createConnection({
+var db = mysql.createConnection({
   host: "localhost",
-  user: "yourusername",
-  password: "yourpassword"
+  user: "dev",
+  password: "dev123",
+  database: "HouseRental"
 });
 
-conn.connect(function(err) {
-  if (err) throw err;
+db.connect(function(err) {
+  if (err) console.log(err);
+  else 
   console.log("Connected!");
-});*/
+});
+global.db = db;
 
 // Use middlewares to set view engine and post json data to the server
 app.use(cors());
