@@ -32,5 +32,7 @@ To start simply run
 >npm start
 
 Renderable Pages are loccated in "views" folder
+
 Route handlers in "routes" folder
+
 resources (imajes, javascripts, stylesheets) located in "public" folder 
