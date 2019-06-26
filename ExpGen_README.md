@@ -9,14 +9,28 @@ testexpress\bin\www
 
 # setup
 
-Upon installing you recieve this message
+to install the modue:
+>npm install -g express-generator
+
+to create a new express project
+>express ExpressProjectName
+
+Upon installing you recieve the quoted message below
+"
    change directory:
-     > cd testexpress
+     > cd ExpressProjectName
 
    install dependencies:
      > npm install
 
    run the app:
-     > SET DEBUG=testexpress:* & npm start
+     > SET DEBUG=ExpressProjectName:* & npm start
 
-To start simply run >npm start
+"
+
+To start simply run 
+>npm start
+
+Renderable Pages are loccated in "views" folder
+Route handlers in "routes" folder
+resources (imajes, javascripts, stylesheets) located in "public" folder 
