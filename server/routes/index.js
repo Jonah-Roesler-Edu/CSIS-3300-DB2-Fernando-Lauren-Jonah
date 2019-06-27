@@ -9,10 +9,6 @@ router.get('/', function(req, res, next) {
   //Page to render
   res.render('index')
 
-
-
-
-
 });
 
 module.exports = router;
