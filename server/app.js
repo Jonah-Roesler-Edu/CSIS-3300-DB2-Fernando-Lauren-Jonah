@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var http = require('http');
 var mysql = require('mysql');
+var path = require('path');
 
 // Connection with MySql
 var db = mysql.createConnection({
@@ -25,7 +26,15 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+//View engine from express-Generator, for rendering Jade
+app.set('views', path.join(__dirname,'/views'));
+app.set('view engine', 'jade');
+
 // Required application specific custom router module
+//Route for index
+var indexRoute = require('./routes/index')
+app.use('/', indexRoute);
+
 // Route for login
 var loginRoute = require('./routes/Login');
 app.use('/login', loginRoute);
