@@ -7,7 +7,7 @@ var path = require('path');
 /* GET login page. */
 router.get('/', function(req, res, next) {
   //Page to render
-  res.render('login')
+  res.sendFile(path.join(__dirname, '..','/views','/Login.html'));
 
   let sql = "SELECT * FROM PERSON WHERE email = '" + req.body.email + "'";
 
