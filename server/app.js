@@ -27,10 +27,10 @@ app.use(bodyParser.json());
 
 // Required application specific custom router module
 // Route for login
-var loginRoute = require('./routes/Login');
-app.use('/login', loginRoute);
-
 // Route for user sign up
+var userRoute = require('./routes/User');
+app.use('/user', userRoute);
+
 // Route for list of houses by search filter
 // Route for insert house
 // Route for consult a house
