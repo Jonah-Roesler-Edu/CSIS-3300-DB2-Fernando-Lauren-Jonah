@@ -24,6 +24,9 @@ global.db = db;
 var userRoute = require('./routes/User');
 app.use('/user', userRoute);
 
+var testRoute = require('./routes/test');
+app.use('/test', testRoute);
+
 // Route for list of houses by search filter
 // Route for insert house
 // Route for consult a house
