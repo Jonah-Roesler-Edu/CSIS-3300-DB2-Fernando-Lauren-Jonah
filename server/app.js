@@ -24,14 +24,28 @@ global.db = db;
 var userRoute = require('./routes/User');
 app.use('/user', userRoute);
 
-var testRoute = require('./routes/test');
-app.use('/test', testRoute);
+// var testRoute = require('./routes/test');
+// app.use('/test', testRoute);
 
 // Route for list of houses by search filter
+var propertyRoute = require('./routes/property');
+app.use('/property', propertyRoute);
+
 // Route for insert house
-// Route for consult a house
-// Route for delete house
-// Route for update house
+// var insertRoute = require('./routes/property');
+// app.use('/user', insertRoute);
+
+// // Route for consult a house
+// var userRoute = require('./routes/User');
+// app.use('/user', userRoute);
+
+// // Route for delete house
+// var userRoute = require('./routes/User');
+// app.use('/user', userRoute);
+
+// // Route for update house
+// var userRoute = require('./routes/User');
+// app.use('/user', userRoute);
 
 var httpServer = http.createServer(app);
 
