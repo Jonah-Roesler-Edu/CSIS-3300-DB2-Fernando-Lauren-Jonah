@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 var cors = require('cors');
 var http = require('http');
 var mysql = require('mysql');
@@ -19,6 +20,11 @@ db.connect(function(err) {
 });
 global.db = db;
 
+// Use middlewares to set view engine and post json data to the server
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 // Route for login
 // Route for user sign up
 var userRoute = require('./routes/User');
@@ -29,6 +35,8 @@ app.use('/user', userRoute);
 // Route for consult a house
 // Route for delete house
 // Route for update house
+var propertyRoute = require('./routes/Property');
+app.use('/property', propertyRoute);
 
 var httpServer = http.createServer(app);
 
