@@ -1,8 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+/**
+ * PAGES IN USERS
+ *    /login
+ *    /signup
+ */
+
 /* GET home page. */
 router.get('/login', function(req, res, next) {
+    //Redirect to another page on button press
+    // if(req.query.redir != undefined) {
+    //   res.redirect('/'+req.query.redir);}
+
   if (!req.body.email) {
     res.status(401).send("Email not informed.");
   }
