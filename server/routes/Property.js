@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 /**
  * PAGES IN PROPERTY
  *      
@@ -98,55 +99,55 @@ router.post('/insert', function(req, res, next) {
     if (!req.body.propertyPurpose) {
         res.status(500).send("Missing property purpose");
     }
-
-    //Added extra, we don't have "preferred contact method" in our SQL
-        //But it is needed
-    if (!req.body.contactMethod) {
-        res.status(500).send("Missing information in fields");
-    }
 })
 
 //View specific property
-router.get('/view/:propertyID', function(req, res, next) {
+router.get('/view', function(req, res, next) {
+    //example URL
+    //http://localhost:3000/property/view/?propertyID=zqq-121
     if(!req.query.propertyID) {
         res.status(500).send("Missing property ID");
     }
+    console.log("PROPERTY ID IS..." + req.query.propertyID);
 
-    // let sql = "SELECT * FROM PROPERTY WHERE propertyID = '" + req.body.propertyID + "'";
+    //Uses URL property ID instead of POST data
+    let sql = "SELECT * FROM PROPERTY WHERE propertyID = '" + req.query.propertyID + "'";
 
-    // db.query(sql, (err, result) => {
-    //     if (err) {
-    //     res.status(500).send("Property not found");
-    //     }
-    //     res.status(200).send(result);
-    // });
+    db.query(sql, (err, result) => {
+        if (err) {
+        res.status(500).send("Property not found");
+        }
+        res.status(200).send(result);
+    });
 })
 
 //Edit property
-router.put('/update', function(req, res, next) {
+router.post('/update', function(req, res, next) {
     if(!req.body.propertyID) {
         res.status(500).send("Missing property ID");
     }
 
-    let sqlupdate = "UPDATE PROPERTY" + 
-                    "SET address = '" + req.body.propertyID + "'," +
-                    "postalCode = '" + req.body.postalCode + "'," +
-                    "city = '" + req.body.city + "'," +
-                    "province = '" + req.body.province + "'," +
-                    "numberOfBed = '" + req.body.numberOfBed + "'," +
-                    "propertyType = '" + req.body.propertyType + "'," +
-                    "description = '" + req.body.description + "'," +
-                    "dateListed = '" + req.body.squareFeet + "'," +
-                    "numbOfBathrooms = '" + req.body.numbOfBathrooms + "'," +
-                    "yearBuilt = '" + req.body.yearBuilt + "'," +
-                    "style = '" + req.body.style + "'," +
-                    "price = '" + req.body.price + "'," +
-                    "propertyPurpose = '" + req.body.propertyPurpose + "'," +
+    let sql = "UPDATE PROPERTY " + 
+                    "SET address = '" + req.body.address + "', " +
+                    "postalCode = '" + req.body.postalCode + "', " +
+                    "city = '" + req.body.city + "', " +
+                    "province = '" + req.body.province + "', " +
+                    "numberOfBed = " + req.body.numberOfBed + ", " +
+                    "propertyType = '" + req.body.propertyType + "', " +
+                    "description = '" + req.body.description + "', " +
+                    "dateListed = '" + req.body.dateListed + "', " +
+                    "numbOfBathrooms = " + req.body.numbOfBathrooms + ", " +
+                    "yearBuilt = '" + req.body.yearBuilt + "', " +
+                    "style = '" + req.body.style + "', " +
+                    "price = " + req.body.price + ", " +
+                    "propertyPurpose = '" + req.body.propertyPurpose + "' " +
                     "WHERE propertyID = '" + req.body.propertyID + "'";
-    db.sqlupdate
+
+                    console.log(req.body.propertyID);
+    // db.sqlUpdate
     db.query(sql, (err, result) => {
         if (err) {
-        res.status(500).send("Property not found");
+        res.status(500).send(err);
         }
     });
 })

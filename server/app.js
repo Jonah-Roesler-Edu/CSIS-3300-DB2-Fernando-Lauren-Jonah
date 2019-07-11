@@ -3,6 +3,7 @@ var app = express();
 var cors = require('cors');
 var http = require('http');
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
 
 // Connection with MySql
 var db = mysql.createConnection({
@@ -13,11 +14,15 @@ var db = mysql.createConnection({
 });
 
 db.connect(function(err) {
-  if (err) console.log(err);
+  if (err){ console.log(err);
+  console.log("failed connection to mysql") }
   else 
   console.log("Connected!");
 });
 global.db = db;
+
+//To parse body requests
+app.use(bodyParser());
 
 // Route for login
 // Route for user sign up
