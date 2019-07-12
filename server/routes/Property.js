@@ -19,9 +19,10 @@ router.get('/search', function(req, res, next) {
 
     db.query(sql, (err, result) => {
         if (err) {
-        res.status(500).send("No properties found.");
+            res.status(500).send("No properties found.");
+        } else {
+            res.status(200).send(result);
         }
-        res.status(200).send(result);
     });
 });
 
@@ -101,19 +102,21 @@ router.post('/insert', function(req, res, next) {
     db.query(sqlInsert, (err, result) => {
         if (err) {
             res.status(500).send("Problem creating Property");
+        } else {
+            res.status(200).send("Property ID: " + result.insertId);
         }
-        res.status(200).send("Property ID: " + result.insertId);
     });
 });
-
 
 //View specific property
 router.get('/view', function(req, res, next) {
     //example URL
     //http://localhost:3000/property/view/?propertyID=zqq-121
-    if(!req.query.propertyID) {
+    if (!req.query.propertyID) {
         res.status(500).send("Missing property ID");
+        return;
     }
+
     console.log("PROPERTY ID IS..." + req.query.propertyID);
 
     //Uses URL property ID instead of POST data
@@ -121,17 +124,18 @@ router.get('/view', function(req, res, next) {
 
     db.query(sql, (err, result) => {
         if (err) {
-        res.status(500).send("Property not found");
+            res.status(500).send("Property not found");
+        } else {
+            res.status(200).send(result);
         }
-        res.status(200).send(result);
     });
-})
+});
 
 //Edit property
 router.post('/update', function(req, res, next) {
-    if(!req.body.propertyID) {
-        res.status(500).send("Missing property ID");
-    }
+    // if(!req.body.propertyID) {
+    //     res.status(500).send("Missing property ID");
+    // }
 
     let sql = "UPDATE PROPERTY " + 
                     "SET address = '"+          req.body.address + "', " +
@@ -153,20 +157,23 @@ router.post('/update', function(req, res, next) {
     // db.sqlUpdate
     db.query(sql, (err, result) => {
         if (err) {
-        res.status(500).send(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send();
         }
     });
-})
-
+});
 
 // Delete a property
 router.delete('/delete', function(req, res, next) {
     let sql = "DELETE FROM PROPERTY WHERE propertyID = '" + req.body.propertyID + "'";
+
     db.query(sql, (err, result) => {
         if (err) {
             res.status(500).send("Property not found");
+        } else {
+            res.status(200).send("Property deleted successfully");
         }
-        res.status(200).send("Property deleted successfully");
     });
 });
 
@@ -180,6 +187,7 @@ function generatePropertyKey() {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
         aux += numbers.charAt(Math.floor(Math.random() * numbers.length));
      }
+
      return result + '-' + aux;
 }
 

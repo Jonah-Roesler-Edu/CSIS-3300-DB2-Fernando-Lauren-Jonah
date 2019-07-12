@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var http = require('http');
 var mysql = require('mysql');
-var bodyParser = require('body-parser');
 
 // Connection with MySql
 var db = mysql.createConnection({
@@ -15,10 +14,12 @@ var db = mysql.createConnection({
 });
 
 db.connect(function(err) {
-  if (err){ console.log(err);
-  console.log("failed connection to mysql") }
-  else 
-  console.log("Connected!");
+  if (err) {  
+    console.log(err);
+    console.log("failed connection to mysql") 
+  } else {
+    console.log("Connected!");
+  }
 });
 global.db = db;
 
@@ -40,7 +41,6 @@ app.use('/property', propertyRoute);
 // Route for consult a house
 // Route for delete house
 // Route for update house
-
 
 var httpServer = http.createServer(app);
 
