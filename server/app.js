@@ -34,13 +34,12 @@ var userRoute = require('./routes/User');
 app.use('/user', userRoute);
 
 // Route for list of houses by search filter
-var propertyRoute = require('./routes/property');
-app.use('/property', propertyRoute);
-
 // Route for insert house
 // Route for consult a house
 // Route for delete house
 // Route for update house
+var propertyRoute = require('./routes/Property');
+app.use('/property', propertyRoute);
 
 var httpServer = http.createServer(app);
 
