@@ -5,18 +5,15 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/login', function(req, res, next) {
-    //Redirect to another page on button press
-    // if(req.query.redir != undefined) {
-    //   res.redirect('/'+req.query.redir);}
-
+  console.log(req.body);
   if (!req.body.email) {
-    res.status(401).send("Email not informed.");
+    return res.status(401).send("Email not informed.");
   }
   
   let sql = "SELECT * FROM PERSON WHERE email = '" + req.body.email + "'";
 
   db.query(sql, (err, result) => {
-    if (err) {
+    if (err || !result) {
       res.status(401).send("User not found.");
     }
     res.status(200).send(result);

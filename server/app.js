@@ -25,7 +25,7 @@ global.db = db;
 
 // Use middlewares to set view engine and post json data to the server
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Route for login
