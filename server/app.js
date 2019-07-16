@@ -1,16 +1,17 @@
 var express = require('express');
 var app = express();
+var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var http = require('http');
-var mysql = require('mysql');
 
 // Connection with MySql
 var db = mysql.createConnection({
-  host: "localhost",
-  user: "dev",
+  host: 'eunocontrole.com', //"localhost",
+  port: 3306,
+  user: "eunoc863_dev", //"dev",
   password: "dev123",
-  database: "HouseRental"
+  database: "eunoc863_HouseRental" //"HouseRental"
 });
 
 db.connect(function(err) {

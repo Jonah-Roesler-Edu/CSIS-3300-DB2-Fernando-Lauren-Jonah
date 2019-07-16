@@ -4,8 +4,7 @@ var router = express.Router();
 
 
 /* GET home page. */
-router.get('/login', function(req, res, next) {
-  console.log(req.body);
+router.route('/login').post(function(req, res) {
   if (!req.body.email) {
     return res.status(401).send("Email not informed.");
   }
