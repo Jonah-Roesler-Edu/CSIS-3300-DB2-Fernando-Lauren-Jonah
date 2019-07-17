@@ -44,3 +44,11 @@ function logout() {
     localStorage.setItem('user', '');
     window.location.reload();
 }
+
+// Parse URL to get parameters
+// reference: http://jsfiddle.net/gilly3/sgxcL/
+function qs(key) {
+    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx control chars
+    var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+}

@@ -7,7 +7,11 @@ router.get('/search', function(req, res, next) {
         res.status(500).send("Missing information to search.");
     }
 
-    let sql = "SELECT * FROM PROPERTY WHERE propertyPurpose = '" + req.body.propertyPurpose + "'";
+    let sql = "SELECT * FROM PROPERTY WHERE city = '" + req.body.city + "'";
+    
+    if (req.body.propertyPurpose) {
+        sql += " AND propertyPurpose = '" + req.body.propertyPurpose + "'";
+    }
 
     if (req.body.numberOfBed) {
         sql += " AND numberOfBed = " + req.body.numberOfBed;
