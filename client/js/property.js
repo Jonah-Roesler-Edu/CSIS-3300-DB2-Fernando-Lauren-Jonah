@@ -1,3 +1,20 @@
+function viewProperty() {
+    $.ajax({
+        url: API_URL + '/property/view',
+        type: "POST",
+        data: {
+            "propertyID": ""
+        },
+        success: function(data) {
+            console.log(JSON.stringify(data));
+            // TODO: redirect to the blog-single.html page to show the property
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + ' - ' + thrownError);
+        }
+    });
+}
+
 function createProperty() {
     $.ajax({
         url: API_URL + '/property/insert',

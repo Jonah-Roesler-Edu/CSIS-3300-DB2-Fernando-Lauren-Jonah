@@ -7,6 +7,7 @@ $(document).ready(function() {
 function checkLoggedIn() {
     if (localStorage.getItem('user') && localStorage.getItem('user') != '') {
         let user = JSON.parse(localStorage.getItem('user'))[0];
+        $('.navbar-nav').append('<li class="nav-item"><a href="my-properties.html" class="nav-link">My Properties</a></li>');
         $('.navbar-nav').append('<li id="logout" class="nav-item cta"><a href="#" onCLick="logout();" class="nav-link"><span>Logout ' + user.firstName + ' ' + user.lastName + '</span></a></li>');
         $('#btnLogin').remove();
     } else {
