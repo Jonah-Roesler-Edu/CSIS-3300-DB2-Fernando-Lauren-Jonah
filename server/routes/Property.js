@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
  //Property listings page
-router.get('/search', function(req, res, next) {
-    if (!req.body.propertyPurpose) {
-        res.status(500).send("Missing information to search.");
+router.route('/search').post(function(req, res) {
+    if (!req.body.city) {
+        return res.status(500).send("Missing information to search.");
     }
 
     let sql = "SELECT * FROM PROPERTY WHERE city = '" + req.body.city + "'";
@@ -124,7 +124,10 @@ router.get('/view', function(req, res, next) {
     console.log("PROPERTY ID IS..." + req.query.propertyID);
 
     //Uses URL property ID instead of POST data
-    let sql = "SELECT * FROM PROPERTY WHERE propertyID = '" + req.query.propertyID + "'";
+    let sql = "SELECT * FROM PROPERTY PT " + 
+                "INNER JOIN PERSON P ON P.personID = PT.personID " +
+                "INNER JOIN PERSON P2 ON P2.personID = PT.agentID " +
+                "WHERE propertyID = '" + req.query.propertyID + "'";
 
     db.query(sql, (err, result) => {
         if (err) {

@@ -1,13 +1,17 @@
-function viewProperty() {
+$(document).ready(function() {
+    viewProperty(qs('propertyID'));
+});
+
+function viewProperty(id) {
     $.ajax({
         url: API_URL + '/property/view',
         type: "POST",
         data: {
-            "propertyID": ""
+            "propertyID": id
         },
         success: function(data) {
             console.log(JSON.stringify(data));
-            // TODO: redirect to the blog-single.html page to show the property
+            // TODO: fill the page with property data
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + ' - ' + thrownError);
