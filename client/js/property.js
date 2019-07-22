@@ -10,8 +10,21 @@ function viewProperty(id) {
             "propertyID": id
         },
         success: function(data) {
+            data = data[0];
             console.log(JSON.stringify(data));
-            // TODO: fill the page with property data
+            $('#description').text(data.description);
+            $('#agent').text(data.firstName + ' ' + data.lastName);
+            $('#province').text(data.province);
+            $('#city').text(data.city);
+            $('#year').text(data.yearBuilt);
+            $('#square-feet').text(data.squareFeet);
+            $('#bedrooms').text(data.numberOfBed);
+            $('#bathrooms').text(data.numbOfBathrooms);
+            $('#style').text(data.style);
+
+            var rnd = Math.floor(Math.random() * 7);
+            rnd = rnd == 0 ? 1 : rnd;
+            $('#img-house').attr('src','images/img_' + rnd + '.jpg');
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + ' - ' + thrownError);

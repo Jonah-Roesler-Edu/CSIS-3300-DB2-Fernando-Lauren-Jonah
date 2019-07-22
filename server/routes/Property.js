@@ -113,21 +113,20 @@ router.post('/insert', function(req, res, next) {
 });
 
 //View specific property
-router.get('/view', function(req, res, next) {
+router.route('/view').post(function(req, res) {
     //example URL
     //http://localhost:3000/property/view/?propertyID=zqq-121
-    if (!req.query.propertyID) {
-        res.status(500).send("Missing property ID");
-        return;
+    if (!req.body.propertyID) {
+        return res.status(500).send("Missing property ID");
     }
 
-    console.log("PROPERTY ID IS..." + req.query.propertyID);
+    console.log("PROPERTY ID IS..." + req.body.propertyID);
 
     //Uses URL property ID instead of POST data
     let sql = "SELECT * FROM PROPERTY PT " + 
                 "INNER JOIN PERSON P ON P.personID = PT.personID " +
                 "INNER JOIN PERSON P2 ON P2.personID = PT.agentID " +
-                "WHERE propertyID = '" + req.query.propertyID + "'";
+                "WHERE propertyID = '" + req.body.propertyID + "'";
 
     db.query(sql, (err, result) => {
         if (err) {
