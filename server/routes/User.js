@@ -19,6 +19,17 @@ router.route('/login').post(function(req, res) {
   });
 });
 
+router.route('/list-agent').post(function(req, res) {
+  let sql = "SELECT * FROM PERSON WHERE personType = 'Agent'";
+
+  db.query(sql, (err, result) => {
+    if (err || !result) {
+      res.status(401).send("Agents not found.");
+    }
+    res.status(200).send(result);
+  });
+});
+
 router.post('/signup', function (req, res, next) {
   //First name, last name, email, password, phone number, person type, person id
   if (!req.body.email) {

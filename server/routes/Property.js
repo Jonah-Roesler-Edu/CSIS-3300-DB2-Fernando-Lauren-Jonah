@@ -137,6 +137,25 @@ router.route('/view').post(function(req, res) {
     });
 });
 
+//View specific property
+router.route('/list-property').post(function(req, res) {
+    if (!req.body.personID) {
+        return res.status(500).send("Missing property owner");
+    }
+
+    //Uses URL property ID instead of POST data
+    let sql = "SELECT * FROM PROPERTY " + 
+                "WHERE personID = " + req.body.personID;
+
+    db.query(sql, (err, result) => {
+        if (err) {
+            res.status(500).send("Property not found");
+        } else {
+            res.status(200).send(result);
+        }
+    });
+});
+
 //Edit property
 router.post('/update', function(req, res, next) {
     // if(!req.body.propertyID) {
