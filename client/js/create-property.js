@@ -2,6 +2,22 @@ $(document).ready(function() {
     loadAgentList();
     if (qs('propertyID'))
         viewProperty(qs('propertyID'));
+
+    $('#btnCancel').click(() => {
+        window.location.href = 'my-properties.html';
+    });
+
+    $('#btnSave').click(() => {
+        var rt;
+
+        if ($('#property-id').val() != '') {
+            rt = 'update';
+        } else {
+            rt = 'insert';
+        }
+
+        manageProperty(rt);
+    });
 });
 
 function viewProperty(id) {
@@ -14,15 +30,22 @@ function viewProperty(id) {
         success: function(data) {
             data = data[0];
             console.log(JSON.stringify(data));
-            $('#description').text(data.description);
-            $('#agent').text(data.firstName + ' ' + data.lastName);
-            $('#province').text(data.province);
-            $('#city').text(data.city);
-            $('#year').text(data.yearBuilt);
-            $('#square-feet').text(data.squareFeet);
-            $('#bedrooms').text(data.numberOfBed);
-            $('#bathrooms').text(data.numbOfBathrooms);
-            $('#style').text(data.style);
+
+            $('#property-id').val(data.propertyID);
+            $('#purpose').val(data.propertyPurpose);
+            $('#address').val(data.address);
+            $('#postal-code').val(data.postalCode);
+            $('#province').val(data.province);
+            $('#city').val(data.city);
+            $('#bedrooms').val(data.numberOfBed);
+            $('#bathrooms').val(data.numbOfBathrooms);
+            $('#type').val(data.propertyType);
+            $('#square-feet').val(data.squareFeet);
+            $('#style').val(data.style);
+            $('#year').val(data.yearBuilt);
+            $('#description').val(data.description);
+            $('#price').val(data.price);
+            $('#agent').val(data.agentID);
 
             var rnd = Math.floor(Math.random() * 7);
             rnd = rnd == 0 ? 1 : rnd;
@@ -53,35 +76,30 @@ function loadAgentList() {
     }
 }
 
-function createProperty() {
+function manageProperty(route) {
     $.ajax({
-        url: API_URL + '/property/insert',
+        url: API_URL + '/property/' + route,
         type: "POST",
         data: {
-            "email": $('#email').val()
-            // TODO: implement all fields
+            "propertyID": $('#property-id').val(),
+            "propertyPurpose": $('#purpose').val(),
+            "address": $('#address').val(),
+            "postalCode": $('#postal-code').val(),
+            "province": $('#province').val(),
+            "city": $('#city').val(),
+            "numberOfBed": $('#bedrooms').val(),
+            "numbOfBathrooms": $('#bathrooms').val(),
+            "propertyType": $('#type').val(),
+            "squareFeet": $('#square-feet').val(),
+            "style": $('#style').val(),
+            "yearBuilt": $('#year').val(),
+            "description": $('#description').val(),
+            "price": $('#price').val(),
+            "agentID": $('#agent').val(),
         },
         success: function(data) {
             console.log(JSON.stringify(data));
-            // TODO: implement success procedure
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + ' - ' + thrownError);
-        }
-    });
-}
-
-function updateProperty() {
-    $.ajax({
-        url: API_URL + '/property/update',
-        type: "POST",
-        data: {
-            "propertyID": ""
-            // TODO: implement all fields
-        },
-        success: function(data) {
-            console.log(JSON.stringify(data));
-            // TODO: implement success procedure
+            window.location.href = 'my-properties.html';
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + ' - ' + thrownError);

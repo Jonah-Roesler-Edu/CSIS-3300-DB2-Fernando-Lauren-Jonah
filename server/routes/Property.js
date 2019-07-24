@@ -30,7 +30,7 @@ router.route('/search').post(function(req, res) {
     });
 });
 
-router.post('/insert', function(req, res, next) {
+router.route('/insert').post(function(req, res) {
     if (!req.body.address) {
         res.status(500).send("Missing address info");
     }
@@ -157,7 +157,7 @@ router.route('/list-property').post(function(req, res) {
 });
 
 //Edit property
-router.post('/update', function(req, res, next) {
+router.route('/update').post(function(req, res) {
     // if(!req.body.propertyID) {
     //     res.status(500).send("Missing property ID");
     // }
@@ -170,11 +170,10 @@ router.post('/update', function(req, res, next) {
                     "numberOfBed = "+           req.body.numberOfBed + ", " +
                     "propertyType = '"+         req.body.propertyType + "', " +
                     "description = '"+          req.body.description + "', " +
-                    "dateListed = '"+           req.body.dateListed + "', " +
                     "numbOfBathrooms = "+       req.body.numbOfBathrooms + ", " +
                     "yearBuilt = '"+            req.body.yearBuilt + "', " +
                     "style = '"+                req.body.style + "', " +
-                    "price = "+                 req.body.price + ", " +
+                    "price = '"+                req.body.price + "', " +
                     "propertyPurpose = '"+      req.body.propertyPurpose + "' " +
                     "WHERE propertyID = '" +    req.body.propertyID + "'";
 
