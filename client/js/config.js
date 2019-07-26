@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = window.location.origin + ":3000"; //"http://localhost:3000";
 
 $(document).ready(function() {
     checkLoggedIn();
