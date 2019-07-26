@@ -9,8 +9,8 @@ var http = require('http');
 var db = mysql.createConnection({
   host: "localhost", //'eunocontrole.com',
   port: 3306,
-  user: "dev", //"root", // "eunoc863_dev", //
-  password: "dev123", //"TT7HKK3hF2WmQL", //,
+  user: "root", //"dev", // "eunoc863_dev", //
+  password: "TT7HKK3hF2WmQL", //,"dev123", //
   database: "HouseRental" // "eunoc863_HouseRental" //
 });
 
