@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let user = JSON.parse(localStorage.getItem('user'))[0];
+    let user = JSON.parse(localStorage.getItem('user'));
 
     $.ajax({
         url: API_URL + '/property/list-property',

@@ -77,7 +77,7 @@ function loadAgentList() {
 }
 
 function manageProperty(route) {
-    let user = JSON.parse(localStorage.getItem('user'))[0];
+    let user = JSON.parse(localStorage.getItem('user'));
 
     $.ajax({
         url: API_URL + '/property/' + route,
