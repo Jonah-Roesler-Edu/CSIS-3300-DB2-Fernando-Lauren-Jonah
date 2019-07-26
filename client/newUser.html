@@ -37,13 +37,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">first name</label>
-                                    <input class="input--style-4" type="text" name="first_name">
+                                    <input class="input--style-4" type="text" id="first_name">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">last name</label>
-                                    <input class="input--style-4" type="text" name="last_name">
+                                    <input class="input--style-4" type="text" id="last_name">
                                 </div>
                             </div>
                         </div>
@@ -52,13 +52,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email">
+                                    <input class="input--style-4" type="email" id="email">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
-                                    <input class="input--style-4" type="text" name="phone">
+                                    <input class="input--style-4" type="text" id="phone">
                                 </div>
                             </div>
                         </div>
@@ -67,6 +67,7 @@
                             <label class="label">Person Type</label>
                             <div class="rs-select2 js-select-simple select--no-search">
                                 Seller
+                                <input type="hidden" id="person-type" value="Seller" />
                                 <!-- <select name="subject">
                                     <option disabled="disabled" selected="selected">Choose option</option>
                                     <option>Buyer</option>
@@ -77,7 +78,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            <button class="btn btn--radius-2 btn--blue" type="button" id="btnCreateAcct">Create Account</button>
                         </div>
                     </form>
                 </div>
@@ -94,6 +95,8 @@
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/new-user.js"></script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 

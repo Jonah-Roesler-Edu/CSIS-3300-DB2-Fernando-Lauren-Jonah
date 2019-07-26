@@ -97,15 +97,15 @@ router.route('/insert').post(function(req, res) {
                     "'" + getDateListed() + "'," +
                     "" + req.body.squareFeet + "," +
                     "" + req.body.numbOfBathrooms + "," +
-                    "" + req.body.yearBuilt + "," +
+                    "'" + req.body.yearBuilt + "'," +
                     "'" + req.body.style + "'," +
                     "'" + req.body.price + "'," +
                     "'" + req.body.propertyPurpose + "'," +
                     "" + req.body.agentID + ");";
-
+console.log(sqlInsert);
     db.query(sqlInsert, (err, result) => {
         if (err) {
-            res.status(500).send("Problem creating Property");
+            res.status(500).send("Problem creating Property." + err);
         } else {
             res.status(200).send("Property ID: " + result.insertId);
         }
@@ -174,7 +174,8 @@ router.route('/update').post(function(req, res) {
                     "yearBuilt = '"+            req.body.yearBuilt + "', " +
                     "style = '"+                req.body.style + "', " +
                     "price = '"+                req.body.price + "', " +
-                    "propertyPurpose = '"+      req.body.propertyPurpose + "' " +
+                    "propertyPurpose = '"+      req.body.propertyPurpose + "', " +
+                    "agentID = " +              req.body.agentID + " " +
                     "WHERE propertyID = '" +    req.body.propertyID + "'";
 
                     console.log(req.body.propertyID);
